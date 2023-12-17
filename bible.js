@@ -1,6 +1,7 @@
 const path = require("path");
 const http = require("http");
 const express = require("express");
+const cors = require("cors");
 const app = express(); /* app is a request handler function */
 const portNumber = 5001;
 
