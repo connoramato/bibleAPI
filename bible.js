@@ -45,6 +45,7 @@ app.use(cors({
 app.options('*', cors());
 
 app.get("/random", async (request, response) => {
+    response.setHeader('Access-Control-Allow-Origin', 'https://bibleapi-xygf.onrender.com/random');
     let index = getRandomInt(max_idx);
     const verse = bible[index];
     response.json(verse);
