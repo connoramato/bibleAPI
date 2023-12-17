@@ -36,6 +36,13 @@ app.use(function (req, res, next) {
     next();
 });
 
+app.use(cors({
+    methods: 'GET,POST,PATCH,DELETE,OPTIONS',
+    optionsSuccessStatus: 200,
+    origin: 'https://bibleapi-xygf.onrender.com/random'
+  }));
+app.options('*', cors());
+
 app.get("/random", async (request, response) => {
     let index = getRandomInt(max_idx);
     const verse = bible[index];
