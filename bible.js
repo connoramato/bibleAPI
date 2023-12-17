@@ -5,11 +5,7 @@ const cors = require("cors");
 const app = express(); /* app is a request handler function */
 const portNumber = 5001;
 
-const bible = require("./bibleCPDV"); 
-/*const bible = (async () => {
-    const biblejson = await fetch('bible.json');
-    return await biblejson.json();
-})();*/
+const bible = require("./bibleCPDV");
 const max_idx = bible.length;
 
 function getRandomInt(max) {
@@ -18,34 +14,9 @@ function getRandomInt(max) {
 
 app.use(express.static(__dirname + '/'));
 
-app.use(function (req, res, next) {
-
-    // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'https://bibleapi-xygf.onrender.com/random');
-
-    // Request methods you wish to allow
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-
-    // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-
-    // Set to true if you need the website to include cookies in the requests sent
-    // to the API (e.g. in case you use sessions)
-    res.setHeader('Access-Control-Allow-Credentials', true);
-
-    // Pass to next layer of middleware
-    next();
-});
-
-app.use(cors({
-    methods: 'GET,POST,PATCH,DELETE,OPTIONS',
-    optionsSuccessStatus: 200,
-    origin: 'https://bibleapi-xygf.onrender.com/random'
-  }));
-app.options('*', cors());
-
 app.get("/random", async (request, response) => {
-    response.setHeader('Access-Control-Allow-Origin', 'https://bibleapi-xygf.onrender.com/random');
+    response.setHeader('Access-Control-Allow-Origin', 'https://bibleverseguesser.onrender.com');
+    //response.appendHeader('Access-Control-Allow-Origin', 'https://bibleverseguesser.onrender.com/play');
     let index = getRandomInt(max_idx);
     const verse = bible[index];
     response.json(verse);
